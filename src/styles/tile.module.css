@@ -1,0 +1,146 @@
+#2 {
+  background-color: #f0e9e2;
+}
+#4 {
+  background-color: #efe6d4;
+}
+#8 {
+  background-color: #edbf92;
+}
+#16 {
+  background-color: #eba97d;
+}
+#32 {
+  background-color: #e99478;
+}
+#64 {
+  background-color: #e77a56;
+}
+#128 {
+  background-color: #edd68e;
+}
+#256 {
+  background-color: #edcc61;
+}
+#512 {
+  background-color: #edc850;
+}
+#1024 {
+  background-color: #edc53f;
+}
+#2048 {
+  background-color: #edc22e;
+}
+
+#4096 {
+  background-color: #3c3a32;
+}
+
+.animation {
+  transition: 0.2s;
+}
+#2,
+#4 {
+  color: #776e65;
+}
+#8,
+#16,
+#32,
+#64,
+#128,
+#256,
+#512,
+#1024,
+#2048,
+#4096 {
+  color: #f9f6f2;
+}
+
+.notInPlay {
+  color: #c8c1b5;
+
+  /* background-color: grey !important; */
+}
+
+.tile {
+  height: calc((100% - 75px) / 4);
+  width: calc((100% - 75px) / 4);
+  left: 0; /* left / top  1*/
+  left: calc(((100% - 75px) / 4) + 30px); /* left / top 2*/
+  left: calc(((100% - 75px) / 4) * 2 + 45px); /* left / top  3*/
+  left: calc(((100% - 75px) / 4) * 3 + 60px); /* left / top  4*/
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  position: absolute;
+}
+
+.a1 {
+  left: 15px;
+  top: 15px;
+}
+.a2 {
+  left: calc(((100% - 75px) / 4) + 30px);
+  top: 15px;
+}
+.a3 {
+  left: calc(((100% - 75px) / 4) * 2 + 45px);
+  top: 15;
+}
+.a4 {
+  left: calc(((100% - 75px) / 4) * 3 + 60px); /* left / top  4*/
+  top: 15px;
+}
+.b1 {
+  left: 15px;
+  top: calc(((100% - 75px) / 4) + 30px);
+}
+.b2 {
+  left: calc(((100% - 75px) / 4) + 30px);
+  top: calc(((100% - 75px) / 4) + 30px);
+}
+.b3 {
+  top: calc(((100% - 75px) / 4) + 30px);
+  left: calc(((100% - 75px) / 4) * 2 + 45px);
+}
+.b4 {
+  top: calc(((100% - 75px) / 4) + 30px);
+  left: calc(((100% - 75px) / 4) * 3 + 60px);
+}
+
+.c1 {
+  left: 15px;
+  top: calc(((100% - 75px) / 4) * 2 + 45px);
+}
+.c2 {
+  left: calc(((100% - 75px) / 4) + 30px);
+  top: calc(((100% - 75px) / 4) * 2 + 45px);
+}
+.c3 {
+  left: calc(((100% - 75px) / 4) * 2 + 45px);
+  top: calc(((100% - 75px) / 4) * 2 + 45px);
+}
+.c4 {
+  left: calc(((100% - 75px) / 4) * 3 + 60px);
+  top: calc(((100% - 75px) / 4) * 2 + 45px);
+}
+
+.d1 {
+  left: 15px;
+  top: calc(((100% - 75px) / 4) * 3 + 60px);
+}
+.d2 {
+  left: calc(((100% - 75px) / 4) + 30px);
+  top: calc(((100% - 75px) / 4) * 3 + 60px);
+}
+.d3 {
+  left: calc(((100% - 75px) / 4) * 2 + 45px);
+  top: calc(((100% - 75px) / 4) * 3 + 60px);
+}
+.d4 {
+  left: calc(((100% - 75px) / 4) * 3 + 60px);
+  top: calc(((100% - 75px) / 4) * 3 + 60px);
+}
