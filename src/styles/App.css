@@ -13,6 +13,12 @@
   margin-top: 20px;
   position: relative;
 }
+@media (max-width: 680px) {
+  .container {
+    width: calc(100vw - 40px);
+    height: calc(100vw - 40px);
+  }
+}
 
 .boxContainer {
   background-color: #c8c1b5;
@@ -57,12 +63,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 32px;
+  flex-direction: column;
 }
 .header h1 {
   font-size: 24px;
 }
 .about {
+  text-align: center;
 }
 .scoreContainer {
   display: flex;
