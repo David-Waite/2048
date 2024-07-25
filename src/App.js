@@ -1,6 +1,7 @@
 import "./styles/App.css";
 import Tile from "./components/Tile";
 import { useEffect, useState } from "react";
+import { useSwipeable } from "react-swipeable";
 
 function App() {
   const [bestScore, setBestScore] = useState(localStorage.getItem("best"));
@@ -469,104 +470,57 @@ function App() {
     }
   }
 
+  async function moveDirection(direction) {
+    let getColumn = direction === "Up" || direction === "Down";
+    let reverse = direction === "Up" || direction === "Left";
+    setInProcess(true);
+    let currentBoard = getBoardState(getColumn ? "column" : "row", reverse);
+
+    let moveState = combineColumns(currentBoard);
+
+    if (!possibleMove(moveState)) {
+      setInProcess(false);
+      return;
+    }
+
+    setAnimation(true);
+    updateLayout(moveState);
+
+    let reset = await resetBoard(
+      moveState,
+      currentBoard,
+      reverse && reverse,
+      getColumn ? "column" : "row"
+    );
+
+    setAnimation(false);
+
+    let updatedArray = updateRandomZeroValue(reset);
+
+    updateLayout(updatedArray);
+    setInProcess(false);
+    setCurrentRoundScore(0);
+  }
+
   async function checkKey(e) {
     e = e || window.event;
 
     if (!inProcess && !gameOver) {
       if (e.keyCode == "38") {
-        setInProcess(true);
-        let columns = getBoardState("column", true);
-
-        let upState = combineColumns(columns);
-
-        if (!possibleMove(upState)) {
-          setInProcess(false);
-          return;
-        }
-
-        setAnimation(true);
-        updateLayout(upState);
-
-        let reset = await resetBoard(upState, columns, true, "column");
-
-        setAnimation(false);
-
-        let updatedArray = updateRandomZeroValue(reset);
-
-        updateLayout(updatedArray);
-        setInProcess(false);
-        setCurrentRoundScore(0);
-      } else if (e.keyCode == "40") {
-        setInProcess(true);
-        let columns = getBoardState("column");
-
-        let downState = combineColumns(columns);
-
-        if (!possibleMove(downState)) {
-          setInProcess(false);
-          return;
-        }
-
-        setAnimation(true);
-        updateLayout(downState);
-
-        let reset = await resetBoard(downState, columns, false, "column");
-        setAnimation(false);
-
-        let updatedArray = updateRandomZeroValue(reset);
-
-        updateLayout(updatedArray);
-
-        setInProcess(false);
-        setCurrentRoundScore(0);
+        moveDirection("Up");
       } else if (e.keyCode == "37") {
-        setInProcess(true);
-        let rows = getBoardState("rows", true);
-
-        let leftState = combineColumns(rows);
-
-        if (!possibleMove(leftState)) {
-          setInProcess(false);
-          return;
-        }
-        setAnimation(true);
-        updateLayout(leftState);
-
-        let reset = await resetBoard(leftState, rows, true, "rows");
-        setAnimation(false);
-
-        let updatedArray = updateRandomZeroValue(reset);
-
-        updateLayout(updatedArray);
-
-        setInProcess(false);
-        setCurrentRoundScore(0);
+        moveDirection("Left");
       } else if (e.keyCode == "39") {
-        setInProcess(true);
-        let rows = getBoardState("rows");
-
-        let leftState = combineColumns(rows);
-
-        if (!possibleMove(leftState)) {
-          setInProcess(false);
-          return;
-        }
-
-        setAnimation(true);
-        updateLayout(leftState);
-
-        let reset = await resetBoard(leftState, rows, false, "rows");
-        setAnimation(false);
-
-        let updatedArray = updateRandomZeroValue(reset);
-
-        updateLayout(updatedArray);
-
-        setInProcess(false);
-        setCurrentRoundScore(0);
+        moveDirection("Right");
+      } else if (e.keyCode == "40") {
+        moveDirection("Down");
       }
     }
   }
+
+  const handlers = useSwipeable({
+    onSwiped: (eventData) => moveDirection(eventData.dir),
+  });
 
   return (
     <div>
@@ -597,7 +551,7 @@ function App() {
         </div>
       </div>
 
-      <div className="container">
+      <div className="container" {...handlers}>
         {gameOver && (
           <div className="gameOver">
             <h2 className="heading">Game Over</h2>
