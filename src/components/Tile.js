@@ -1,6 +1,6 @@
 import styles from "../styles/tile.module.css";
 
-export default function Tile({ number, position, animation, inPlay, ref }) {
+export default function Tile({ number, position, animation, ref }) {
   return (
     <div
       ref={ref}
