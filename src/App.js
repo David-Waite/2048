@@ -520,7 +520,6 @@ function App() {
 
   const handlers = useSwipeable({
     onSwiped: (eventData) => moveDirection(eventData.dir),
-    preventScrollOnSwipe: true,
   });
 
   return (

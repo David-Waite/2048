@@ -1,4 +1,5 @@
 .container {
+  touch-action: none;
   height: 70vh;
   width: 70vh;
   margin: 0 auto;
