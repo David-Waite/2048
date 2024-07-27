@@ -2,13 +2,16 @@ import "./styles/App.css";
 import Tile from "./components/Tile";
 import { useEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
+import Confetti from "react-confetti";
 
 function App() {
   const [bestScore, setBestScore] = useState(localStorage.getItem("best"));
+  const [width, setWidth] = useState(window.innerWidth);
+  const [height, setHeight] = useState(window.innerHeight);
   const [score, setScore] = useState(0);
   const [currentRoundScore, setCurrentRoundScore] = useState(0);
   const [inProcess, setInProcess] = useState(false);
-
+  const [won, setWon] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [animation, setAnimation] = useState(true);
   const [layout, setLayout] = useState({
@@ -84,6 +87,12 @@ function App() {
     }
   }, [gameOver]);
 
+  function gameWin() {
+    setWon(true);
+    setTimeout(() => {
+      setWon(false);
+    }, 5000);
+  }
   document.onkeydown = checkKey;
 
   function combineObjects(objects, noScore) {
@@ -147,6 +156,9 @@ function App() {
             value: objects[innerLoopPostion].value,
           };
           if (!noScore) {
+            if (objects[outerLoopPostion].value === 1024) {
+              gameWin();
+            }
             setScore((prev) => prev + objects[outerLoopPostion].value * 2);
             setCurrentRoundScore(
               (prev) => prev + objects[outerLoopPostion].value * 2
@@ -524,6 +536,8 @@ function App() {
 
   return (
     <div>
+      {won && <Confetti width={width} height={height} />}
+
       <div className="header">
         <div className="about">
           <h1>2048 Clone</h1>

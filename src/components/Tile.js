@@ -9,7 +9,7 @@ export default function Tile({ number, position, animation, ref }) {
         number === 0 && styles.notInPlay
       } ${animation && styles.animation}`}
     >
-      {number}
+      {number !== 0 && number}
     </div>
   );
 }
